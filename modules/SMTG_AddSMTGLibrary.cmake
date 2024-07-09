@@ -321,6 +321,8 @@ function(smtg_target_make_plugin_package target pkg_name extension)
         smtg_target_setup_universal_binary(${target})
         smtg_target_codesign(${target} ${SMTG_IOS_DEVELOPMENT_TEAM} "${SMTG_CODE_SIGN_IDENTITY_MAC}")
 
+        smtg_target_create_resources_folder(${target})
+
     elseif(SMTG_WIN)
         if(SMTG_CUSTOM_BINARY_LOCATION)
             set(PLUGIN_PACKAGE_PATH ${PLUGIN_BINARY_DIR}/${PLUGIN_PACKAGE_NAME})
@@ -400,6 +402,7 @@ function(smtg_target_make_plugin_package target pkg_name extension)
                     LINK_FLAGS_RELEASE /DEBUG
             )
         endif(MSVC)
+
     elseif(SMTG_LINUX)
         smtg_get_linux_architecture_name() # Sets var LINUX_ARCHITECTURE_NAME
         message(STATUS "[SMTG] Linux architecture name is ${LINUX_ARCHITECTURE_NAME}.")
@@ -418,9 +421,11 @@ function(smtg_target_make_plugin_package target pkg_name extension)
         elseif(${CMAKE_BUILD_TYPE} MATCHES RelWithDebInfo)
             smtg_target_strip_symbols_with_dbg(${target})
         endif()
+
+        smtg_target_create_resources_folder(${target})
+        
     endif(SMTG_MAC)
 
-    smtg_target_create_resources_folder(${target})
 endfunction(smtg_target_make_plugin_package)
 
 #------------------------------------------------------------------------

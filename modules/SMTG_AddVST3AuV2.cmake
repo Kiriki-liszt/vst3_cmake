@@ -26,6 +26,18 @@ if (XCODE AND SMTG_COREAUDIO_SDK_PATH)
 	# @param VST3_PLUGIN_TARGET     the vst3 plugin target
 	#------------------------------------------------------------------------
 	function(smtg_target_add_auv2 target)
+	
+	set(SMTG_AUV2_FOLDER FOLDER "AudioUnit V2")
+
+	set(AUv2_sources
+		${public_sdk_SOURCE_DIR}/source/vst/auwrapper/aucocoaview.mm
+		${public_sdk_SOURCE_DIR}/source/vst/auwrapper/aucocoaview.h
+		${public_sdk_SOURCE_DIR}/source/vst/auwrapper/ausdk.mm
+		${public_sdk_SOURCE_DIR}/source/vst/auwrapper/auwrapper.mm
+		${public_sdk_SOURCE_DIR}/source/vst/auwrapper/auwrapper.h
+		${public_sdk_SOURCE_DIR}/source/vst/auwrapper/NSDataIBStream.mm
+		${public_sdk_SOURCE_DIR}/source/vst/auwrapper/NSDataIBStream.h
+	)
 
 		set(oneValueArgs
 			BUNDLE_NAME
